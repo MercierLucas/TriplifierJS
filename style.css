@@ -1,0 +1,117 @@
+:root
+{
+    --blue:#0275d8;
+    --red: #d9534f;
+    --lightblue: #5bc0de ;
+}
+
+html,body
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container
+{
+    margin: auto;
+    width: 80%;
+    
+}
+
+.mt
+{
+    margin-top: 2rem;
+}
+
+.container h1
+{
+    text-align: center;
+}
+
+.abstract
+{
+    text-align: center;
+}
+
+.center
+{
+    text-align: center;
+}
+
+.right
+{
+    text-align: right;
+}
+
+.red
+{
+    text-decoration: none;
+    color: var(--red);
+}
+
+.blue
+{
+    color:var(--blue);
+}
+
+.col
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    gap: 1rem;
+}
+
+.col-item
+{
+    border: 1px solid grey;
+    padding: 10px;
+}
+
+.col-item p
+{
+    text-align: center;
+    
+}
+
+
+textarea
+{
+    font-family: 'Open Sans', sans-serif;
+
+    border: 1px solid grey;
+    border-radius: 5px;
+
+    padding: 10px;
+    width: 90%;
+    height: 90%;
+
+    -webkit-box-shadow: 3px 4px 5px -1px rgba(0,0,0,0.59);
+    -moz-box-shadow: 3px 4px 5px -1px rgba(0,0,0,0.59);
+    box-shadow: 3px 4px 5px -1px rgba(0,0,0,0.59);
+}
+
+
+input[type=text]
+{
+    font-size: 1.2rem;
+    border: 0;
+    border-bottom: 1px solid grey;
+
+}
+
+input[type=button]
+{
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+
+    background-color:  #5bc0de ;
+    color: white;
+}
+
+input[type=button]:hover
+{
+    cursor: pointer;
+}

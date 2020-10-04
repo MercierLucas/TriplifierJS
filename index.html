@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+    <title>TriplifierJS</title>
+</head>
+<body>
+    <div class="container">
+        <h1>TriplifierJS</h1>
+
+        <div class="abstract">
+            <p>This tool helps converting any csv to triplets that can then be used in triple store.</p>
+            <p>It was developped for the ISEP course <span class="blue">II.3521 - Semantic web and Knowledge management</span></p>
+        </div>
+
+        <div class="col">
+
+            <div class="col-item">
+                <p>Select a file</p>
+                <div><input type="file" id="csv-file"></div>
+                <p>Or paste your CSV here</p>
+
+                <div class="center">
+                    <div class="right"><a href="#" class="red" id="clear">clear</a></div>
+                    <textarea cols="30" rows="10" id="raw-csv" ></textarea>
+                </div>
+
+                <div class="mt center">
+                    <div class="col">
+                        <div>Separator</div>
+                        <div><input type="text" value=";" id="separator"></div>
+                    </div>
+                    <div class="col mt">
+                        <div>Include header</div>
+                        <div><input type="checkbox" checked id="include-header"></div>
+                    </div>
+                    <div class="col mt">
+                        <div>Header line</div>
+                        <div><input type="number" value="1" id="header-line"></div>
+                    </div>
+
+                    <input type="button" class="mt" id="generate" value="Generate turtle">
+                </div>
+
+            </div>
+
+
+            <div class="col-item">
+                <p>Result</p>
+                
+                <div class="center">
+                    <textarea id="result" cols="30" rows="10"></textarea>
+                    
+                </div>
+
+                <div class="center"><input type="button" class="mt" id="download" value="Download result"></div>
+                
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="triplifierJS.js"></script>
