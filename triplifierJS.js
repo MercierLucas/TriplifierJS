@@ -11,6 +11,10 @@ var TriplifierJS = function()
     var _headerLine;
     var _separator;
     var _clear;
+    var _specficStartLine;
+    var _specficEndLine;
+    var _startLine;
+    var _endLine;
 
     // i/o
     var _result;
@@ -18,15 +22,7 @@ var TriplifierJS = function()
 
     $(document).ready(function()
     {
-        _downloadButton = $("#download");
-        _generateButton = $("#generate");
-        _includeHeader = $("#include-header");
-        _headerLine = $("#header-line");
-        _separator = $("#separator");
-        _inputFile = $("#csv-file");
-        _result = $("#result");
-        _rawCSV = $("#raw-csv");
-        _clear = $("#clear");
+        init();
 
         _clear.on("click",function(e)
         {
@@ -51,14 +47,64 @@ var TriplifierJS = function()
         
         _includeHeader.on("click",function()
         {
-            changeHeaderOptions(_includeHeader.prop("checked"));
+            updateHeaderBlock();
+        });
+
+        _specficStartLine.on("click",function()
+        {
+            updateStartBlock();
+        });
+
+        _specficEndLine.on("click",function()
+        {
+            updateEndBlock();
         });
     });
 
-    function changeHeaderOptions(checked)
+    function updateHeaderBlock()
     {
-        _headerLine.prop("disabled",!checked);
-        _headerLine.val(0);
+        var show = _includeHeader.prop("checked");
+        $("#header-block").css("display", show ? "grid" : "none")
+        _headerLine.val(show ? 1 : 0);
+    }
+    function updateStartBlock()
+    {
+        var show = _specficStartLine.prop("checked");
+        $("#start-block").css("display",show ? "grid" : "none");
+        _startLine.val(show ? 1 : 0);
+    }
+
+    function updateEndBlock()
+    {
+        var show = _specficEndLine.prop("checked");
+        $("#end-block").css("display",show ? "grid" : "none");
+        _endLine.val(show ? getCurrentCSVLength() : -1);
+    }
+
+    function init()
+    {
+        _downloadButton = $("#download");
+        _generateButton = $("#generate");
+        _includeHeader = $("#include-header");
+        _headerLine = $("#header-line");
+        _separator = $("#separator");
+        _inputFile = $("#csv-file");
+        _result = $("#result");
+        _rawCSV = $("#raw-csv");
+        _clear = $("#clear");
+        _specficStartLine = $("#specific-start");
+        _specficEndLine = $("#specific-end");
+        _startLine = $("#start-line");
+        _endLine = $("#end-line");
+
+        updateStartBlock();
+        updateEndBlock();
+        updateHeaderBlock();
+    }
+
+    function getCurrentCSVLength()
+    {
+        return _rawCSV.val().split("\n").length;
     }
 
     function loadFile(event)
@@ -77,9 +123,12 @@ var TriplifierJS = function()
     function getParameters()
     {
         var separator = _separator.val();
-        var headerLine = _headerLine.val();
+        var headerLine = parseInt(_headerLine.val());
         var csv = _rawCSV.val();
-        var turtle = generateCSV(csv,separator,headerLine);
+        var startLine = parseInt(_startLine.val());
+        var endLine = parseInt(_endLine.val());
+
+        var turtle = generateCSV(csv,separator,headerLine,startLine,endLine);
 
         _result.text(turtle);
     }
@@ -100,25 +149,21 @@ var TriplifierJS = function()
         document.body.removeChild(element);
     }
 
-    function generateCSV(csv, separator, headerLine)
+    function generateCSV(csv, separator, headerLine, startingLine, endingLine)
     {
-        var headerLine = parseInt(headerLine);
-        console.log("Separator "+separator);
-        console.log("HeaderLine "+headerLine);
-
         var turtle = "@prefix data: <http://ex.org/data/>. \n@prefix pred: <http://ex.org/predicat/>. \n \n";
 
         var lines = csv.split("\n");
         console.log(lines);
         var n_colonnes = lines[0].split(separator).length;
         var predicats = [];
-        var startLine = headerLine == 0 ? 1 : 0;
-        var endLine = lines.length-1;
+
+        var startLine = startingLine == 0 ? (headerLine == 0 ? 1 : 0) : startingLine;
+        var endLine = endingLine == -1 ? lines.length - 1 : endingLine;
 
         if(headerLine != 0)
         {
             predicats = lines[headerLine-1].split(separator);
-            console.log(lines[headerLine-1]);
         }
         else
         {
@@ -127,7 +172,6 @@ var TriplifierJS = function()
                 predicats.push("Pred"+i);
             }
         }
-
         for (let nLine = startLine; nLine < endLine; nLine++)
         {
             if(nLine == headerLine - 1) continue;

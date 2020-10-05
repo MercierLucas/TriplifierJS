@@ -29,17 +29,33 @@
                 </div>
 
                 <div class="mt center">
-                    <div class="col">
+                    <div class="col-small">
                         <div>Separator</div>
                         <div><input type="text" value=";" id="separator"></div>
                     </div>
-                    <div class="col mt">
+                    <div class="col-small mt">
                         <div>Include header</div>
-                        <div><input type="checkbox" checked id="include-header"></div>
+                        <div><input type="checkbox" id="include-header"></div>
                     </div>
-                    <div class="col mt">
+                    <div class="col-small mt" id="header-block" style="display: none;">
                         <div>Header line</div>
                         <div><input type="number" value="1" id="header-line"></div>
+                    </div>
+                    <div class="col-small mt">
+                        <div>Specific start line</div>
+                        <div><input type="checkbox" id="specific-start"></div>
+                    </div>
+                    <div class="col-small mt" id="start-block" style="display: none;">
+                        <div>Start line</div>
+                        <div><input type="number" value="1" id="start-line"></div>
+                    </div>
+                    <div class="col-small mt">
+                        <div>Specific end line</div>
+                        <div><input type="checkbox" id="specific-end"></div>
+                    </div>
+                    <div class="col-small mt" id="end-block" style="display: none;">
+                        <div>End line</div>
+                        <div><input type="number" value="1" id="end-line"></div>
                     </div>
 
                     <input type="button" class="mt" id="generate" value="Generate turtle">
