@@ -159,7 +159,7 @@ var TriplifierJS = function()
         var predicats = [];
 
         var startLine = startingLine == 0 ? (headerLine == 0 ? 1 : 0) : startingLine;
-        var endLine = endingLine == -1 ? lines.length - 1 : endingLine;
+        var endLine = endingLine == -1 ? lines.length : endingLine;
 
         if(headerLine != 0)
         {
