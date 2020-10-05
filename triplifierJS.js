@@ -158,7 +158,7 @@ var TriplifierJS = function()
         var n_colonnes = lines[0].split(separator).length;
         var predicats = [];
 
-        var startLine = startingLine == 0 ? (headerLine == 0 ? 1 : 0) : startingLine;
+        var startLine = startingLine == 0 ? (headerLine == 0 ? 0 : 1) : startingLine;
         var endLine = endingLine == -1 ? lines.length - 1 : endingLine;
 
         if(headerLine != 0)
