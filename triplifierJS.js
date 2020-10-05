@@ -159,7 +159,7 @@ var TriplifierJS = function()
         var predicats = [];
 
         var startLine = startingLine == 0 ? (headerLine == 0 ? 1 : 0) : startingLine;
-        var endLine = endingLine == -1 ? lines.length : endingLine;
+        var endLine = endingLine == -1 ? lines.length - 1 : endingLine;
 
         if(headerLine != 0)
         {
@@ -172,7 +172,7 @@ var TriplifierJS = function()
                 predicats.push("Pred"+i);
             }
         }
-        for (let nLine = startLine; nLine < endLine; nLine++)
+        for (let nLine = startLine; nLine <= endLine; nLine++)
         {
             if(nLine == headerLine - 1) continue;
 
