@@ -154,12 +154,11 @@ var TriplifierJS = function()
         var turtle = "@prefix data: <http://ex.org/data/>. \n@prefix pred: <http://ex.org/predicat/>. \n \n";
 
         var lines = csv.split("\n");
-        console.log(lines);
         var n_colonnes = lines[0].split(separator).length;
         var predicats = [];
 
-        var startLine = startingLine == 0 ? (headerLine == 0 ? 0 : 1) : startingLine;
-        var endLine = endingLine == -1 ? lines.length - 1 : endingLine;
+        var startLine = startingLine == 0 ? (headerLine == 0 ? 0 : 1) : startingLine - 1;
+        var endLine = endingLine == -1 ? lines.length - 1 : endingLine - 1;
 
         if(headerLine != 0)
         {
