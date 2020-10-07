@@ -15,10 +15,15 @@ var TriplifierJS = function()
     var _specficEndLine;
     var _startLine;
     var _endLine;
+    var _specificSubject;
+    var _subject;
 
     // i/o
     var _result;
     var _rawCSV;
+
+    //files
+    var _filename;
 
     $(document).ready(function()
     {
@@ -59,8 +64,29 @@ var TriplifierJS = function()
         {
             updateEndBlock();
         });
+
+        _specificSubject.on("click",function()
+        {
+            updateSubjectBlock();
+        });
     });
 
+    function concatAndTowerCase(word)
+    {
+        var splited = word.split(" ");
+        var result = "";
+
+        splited.forEach(element =>
+        {
+            if(element.length != 0)
+            {
+                result += element[0].toUpperCase() + element.slice(1);
+            } 
+        });
+
+        return result.length > 0 ? result : word;
+    }
+    
     function updateHeaderBlock()
     {
         var show = _includeHeader.prop("checked");
@@ -81,6 +107,13 @@ var TriplifierJS = function()
         _endLine.val(show ? getCurrentCSVLength() : -1);
     }
 
+    function updateSubjectBlock()
+    {
+        var show = _specificSubject.prop("checked");
+        $("#subject-block").css("display",show ? "grid" : "none");
+        _subject.val(show ? getFileName() : "");
+    }
+
     function init()
     {
         _downloadButton = $("#download");
@@ -96,15 +129,23 @@ var TriplifierJS = function()
         _specficEndLine = $("#specific-end");
         _startLine = $("#start-line");
         _endLine = $("#end-line");
+        _specificSubject = $("#specific-subject");
+        _subject = $("#subject");
 
         updateStartBlock();
         updateEndBlock();
         updateHeaderBlock();
+        updateSubjectBlock();
     }
 
     function getCurrentCSVLength()
     {
         return _rawCSV.val().split("\n").length;
+    }
+
+    function getFileName()
+    {
+        return _inputFile[0].files.length > 0 ? _inputFile[0].files[0].name.split(".")[0] : "";
     }
 
     function loadFile(event)
@@ -116,6 +157,7 @@ var TriplifierJS = function()
         reader.onload = function()
         {
             _rawCSV.val(reader.result);
+            _filename = getFileName();
         }
         reader.readAsText(input.files[0]);
     }
@@ -125,10 +167,11 @@ var TriplifierJS = function()
         var separator = _separator.val();
         var headerLine = parseInt(_headerLine.val());
         var csv = _rawCSV.val();
+        var subject = _subject.val();
         var startLine = parseInt(_startLine.val());
         var endLine = parseInt(_endLine.val());
 
-        var turtle = generateCSV(csv,separator,headerLine,startLine,endLine);
+        var turtle = generateCSV(csv,separator, subject, headerLine,startLine,endLine);
 
         _result.text(turtle);
     }
@@ -139,7 +182,10 @@ var TriplifierJS = function()
         // credits to @mikemaccana 
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(ttl));
-        element.setAttribute('download', "test.ttl");
+
+        var filename = _filename ? _filename+".ttl" : "result.ttl";
+
+        element.setAttribute('download', filename);
 
         element.style.display = 'none';
         document.body.appendChild(element);
@@ -149,9 +195,12 @@ var TriplifierJS = function()
         document.body.removeChild(element);
     }
 
-    function generateCSV(csv, separator, headerLine, startingLine, endingLine)
+    function generateCSV(csv, separator, subject, headerLine, startingLine, endingLine)
     {
-        var turtle = "@prefix data: <http://ex.org/data/>. \n@prefix pred: <http://ex.org/predicat/>. \n \n";
+        var turtle = "@prefix data: <http://ex.org/data/>. \n@prefix pred: <http://ex.org/predicat/>. \n";
+        var addSubject = typeof subject !== "undefined" && subject.length > 0;
+
+        turtle += addSubject ? "@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> . \n \n" : "\n";
 
         var lines = csv.split("\n");
         var n_colonnes = lines[0].split(separator).length;
@@ -162,7 +211,9 @@ var TriplifierJS = function()
 
         if(headerLine != 0)
         {
-            predicats = lines[headerLine-1].split(separator);
+            lines[headerLine-1].split(separator).forEach(word => {
+                predicats.push(concatAndTowerCase(word));
+            });
         }
         else
         {
@@ -176,6 +227,12 @@ var TriplifierJS = function()
             if(nLine == headerLine - 1) continue;
 
             var element = "data:"+nLine;
+            
+            if(addSubject)
+            {
+                element += "\t \t "+ "rdf:type data:"+subject+"; \n";
+            }
+
             var line = lines[nLine];
             var words = line.split(separator);
 
@@ -185,7 +242,7 @@ var TriplifierJS = function()
 
                 var object = isNaN(parseFloat(word)) ? "\""+word+"\"" : parseFloat(word);
 
-                if(nWord == 0)
+                if(nWord == 0 && !addSubject)
                 {
                     element += "\t \t";
                 }
