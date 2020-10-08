@@ -80,7 +80,8 @@ var TriplifierJS = function()
         {
             if(element.length != 0)
             {
-                result += element[0].toUpperCase() + element.slice(1);
+                var word = element[0].toUpperCase() + element.slice(1);
+                result += word.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
             } 
         });
 
