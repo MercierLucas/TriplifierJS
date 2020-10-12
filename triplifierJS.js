@@ -28,7 +28,7 @@ var TriplifierJS = function()
     $(document).ready(function()
     {
         init();
-
+    
         _clear.on("click",function(e)
         {
             e.preventDefault();
@@ -69,7 +69,19 @@ var TriplifierJS = function()
         {
             updateSubjectBlock();
         });
+
+        $(".predifined_csv").on("click",function(){
+            loadPredifinedCSV(this.id.replace("load_",""));
+
+        });
     });
+
+    function loadPredifinedCSV(csv)
+    {
+        fetch("datasets/"+csv+".csv")
+            .then(response => response.text())
+            .then(text => _rawCSV.val(text))
+    }
 
     function concatAndTowerCase(word)
     {

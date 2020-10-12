@@ -21,6 +21,15 @@
             <div class="col-item">
                 <p>Select a file</p>
                 <div><input type="file" id="csv-file"></div>
+
+                <p>Or load predifined test dataset</p>
+
+                <div class="center grid">
+                    <button class="button-outline predifined_csv" id="load_csv_1">Predifined csv #1</button>
+                    <button class="button-outline predifined_csv" id="load_csv_1">Predifined csv #2</button>
+                    <button class="button-outline predifined_csv" id="load_csv_1">Predifined csv #3</button>
+                </div>
+
                 <p>Or paste your CSV here</p>
 
                 <div class="center">
@@ -31,7 +40,7 @@
                 <div class="mt center">
                     <div class="col-small">
                         <div>Separator</div>
-                        <div><input type="text" value=";" id="separator"></div>
+                        <div><input type="text" value=";" id="separator" maxlength="1"></div>
                     </div>
                     <div class="col-small mt">
                         <div>Specify csv subject</div>
