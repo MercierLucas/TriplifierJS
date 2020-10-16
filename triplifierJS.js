@@ -239,6 +239,11 @@ var TriplifierJS = function()
         {
             if(nLine == headerLine - 1) continue;
 
+            var line = lines[nLine];
+            var words = line.split(separator);
+
+            if(words[0].length == 0) continue; // remove empty lines
+
             var element = "data:"+nLine;
             
             if(addSubject)
@@ -246,14 +251,27 @@ var TriplifierJS = function()
                 element += "\t \t "+ "rdf:type data:"+subject+"; \n";
             }
 
-            var line = lines[nLine];
-            var words = line.split(separator);
 
             for (let nWord = 0; nWord < words.length; nWord++)
             {
                 var word = words[nWord];
+                var object;
 
-                var object = isNaN(parseFloat(word)) ? "\""+word+"\"" : parseFloat(word);
+                if(isNaN(parseFloat(word.replace("\"","").replace("\'",""))))
+                {
+                    if((word.indexOf('\'') > -1) || (word.indexOf('"') > -1))
+                    {
+                        object = word;
+                    }
+                    else
+                    {
+                        object = "\""+word+"\"";
+                    }
+                }
+                else
+                {
+                    object = parseFloat(word.replace("\"","").replace("\'",""));
+                }
 
                 if(nWord == 0 && !addSubject)
                 {

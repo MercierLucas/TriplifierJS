@@ -1,0 +1,29 @@
+"city","city_ascii","lat","lng","country","iso2","iso3","admin_name","capital","population","id"
+"Malishevë","Malisheve","42.4822","20.7458","Kosovo","XK","XKS","Malishevë","admin","","1901597212"
+"Prizren","Prizren","42.2139","20.7397","Kosovo","XK","XKS","Prizren","admin","","1901360309"
+"Zubin Potok","Zubin Potok","42.9144","20.6897","Kosovo","XK","XKS","Zubin Potok","admin","","1901608808"
+"Kamenicë","Kamenice","42.5781","21.5803","Kosovo","XK","XKS","Kamenicë","admin","","1901851592"
+"Viti","Viti","42.3214","21.3583","Kosovo","XK","XKS","Viti","admin","","1901328795"
+
+
+"Shtërpcë","Shterpce","42.2394","21.0272","Kosovo","XK","XKS","Shtërpcë","admin","","1901828239"
+"Shtime","Shtime","42.4331","21.0397","Kosovo","XK","XKS","Shtime","admin","","1901598505"
+"Vushtrri","Vushtrri","42.8231","20.9675","Kosovo","XK","XKS","Vushtrri","admin","","1901107642"
+"Dragash","Dragash","42.0265","20.6533","Kosovo","XK","XKS","Dragash","admin","","1901112530"
+"Podujevë","Podujeve","42.9111","21.1899","Kosovo","XK","XKS","Podujevë","admin","","1901550082"
+"Fushë Kosovë","Fushe Kosove","42.6639","21.0961","Kosovo","XK","XKS","Fushë Kosovë","admin","","1901134407"
+"Kaçanik","Kacanik","42.2319","21.2594","Kosovo","XK","XKS","Kaçanik","admin","","1901200321"
+"Klinë","Kline","42.6217","20.5778","Kosovo","XK","XKS","Klinë","admin","","1901230162"
+
+"Leposaviq","Leposaviq","43.1039","20.8028","Kosovo","XK","XKS","Leposaviq","admin","","1901974597"
+"Pejë","Peje","42.6600","20.2922","Kosovo","XK","XKS","Pejë","admin","","1901339694"
+"Rahovec","Rahovec","42.3994","20.6547","Kosovo","XK","XKS","Rahovec","admin","","1901336358"
+"Gjilan","Gjilan","42.4689","21.4633","Kosovo","XK","XKS","Gjilan","admin","","1901235642"
+"Lipjan","Lipjan","42.5217","21.1258","Kosovo","XK","XKS","Lipjan","admin","","1901682048"
+
+
+"Obiliq","Obiliq","42.6869","21.0703","Kosovo","XK","XKS","Obiliq","admin","","1901102771"
+"Gjakovë","Gjakove","42.3803","20.4308","Kosovo","XK","XKS","Gjakovë","admin","","1901089874"
+"Pristina","Pristina","42.6666","21.1724","Kosovo","XK","XKS","Prishtinë","primary","","1901760068"
+"Deçan","Decan","42.5378","20.2911","Kosovo","XK","XKS","Deçan","admin","","1901189818"
+"Istog","Istog","42.7808","20.4875","Kosovo","XK","XKS","Istog","admin","","1901248770"
